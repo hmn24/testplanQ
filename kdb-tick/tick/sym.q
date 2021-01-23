@@ -1,0 +1,2 @@
+trade:([] time:`timestamp$(); sym:`symbol$(); price:`float$(); size:`float$());
+quote:([] time:`timestamp$(); sym:`symbol$(); src:`symbol$(); bid:`float$(); ask:`float$(); bsize:`float$(); asize:`float$());
