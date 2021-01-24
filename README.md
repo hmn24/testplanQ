@@ -1,10 +1,13 @@
 # testplanQ
 Using MS's testplan framework with qpython to generate multitest for kdb+
 
+Codes have been reformatted against python's black lib
+
 ## Links:
 1) https://testplan.readthedocs.io/en/latest/
 2) https://github.com/KxSystems/kdb-tick
 3) https://qpython.readthedocs.io/en/latest/
+4) https://github.com/psf/black
 
 ## Scripts Required:
 1) startKdbProcesses.py

@@ -19,9 +19,10 @@ import startKdbProcesses as kdb
 OUTPUT_STYLE = Style(StyleEnum.ASSERTION_DETAIL, StyleEnum.ASSERTION_DETAIL)
 
 INITIAL_CONTEXT = {
-    'kdbTp': dict(proc='TP', cmd=['kdb-tick/tick.q'], port=5010),
-    'kdbRdb': dict(proc='RDB', cmd=['kdb-tick/tick/r.q'], port=5011),
- }
+    "kdbTp": dict(proc="TP", cmd=["kdb-tick/tick.q"], port=5010),
+    "kdbRdb": dict(proc="RDB", cmd=["kdb-tick/tick/r.q"], port=5011),
+}
+
 
 @testsuite
 class KdbQueries(object):
@@ -42,23 +43,39 @@ class KdbQueries(object):
     def TP_loaded_successfully(self, env, result):
         """Ensure TP loads successfully"""
         # Check schema
-        result.true(self.kdbTpObj.syncQueryProc('all `time`sym`price`size in cols trade'), description="Schema of TP trade table is correct")
-        result.true(self.kdbTpObj.syncQueryProc('all `time`sym`src`bid`ask`bsize`asize in cols quote'), description="Schema of TP quote table is correct")
+        result.true(
+            self.kdbTpObj.syncQueryProc("all `time`sym`price`size in cols trade"),
+            description="Schema of TP trade table is correct",
+        )
+        result.true(
+            self.kdbTpObj.syncQueryProc("all `time`sym`src`bid`ask`bsize`asize in cols quote"),
+            description="Schema of TP quote table is correct",
+        )
 
         # Check connected to RDB
-        result.true(self.kdbTpObj.syncQueryProc('all 0 < count each .u.w'), description="Check subscription to TP by RDB")
+        result.true(
+            self.kdbTpObj.syncQueryProc("all 0 < count each .u.w"),
+            description="Check subscription to TP by RDB",
+        )
 
     @testcase
     def RDB_loaded_successfully(self, env, result):
         """Ensure RDB loads successfully"""
         # Check schema
-        result.true(self.kdbRdbObj.syncQueryProc('all `time`sym`price`size in cols trade'), description="Schema of RDB trade table is correct")
-        result.true(self.kdbRdbObj.syncQueryProc('all `time`sym`src`bid`ask`bsize`asize in cols quote'), description="Schema of RDB quote table is correct")
+        result.true(
+            self.kdbRdbObj.syncQueryProc("all `time`sym`price`size in cols trade"),
+            description="Schema of RDB trade table is correct",
+        )
+        result.true(
+            self.kdbRdbObj.syncQueryProc("all `time`sym`src`bid`ask`bsize`asize in cols quote"),
+            description="Schema of RDB quote table is correct",
+        )
 
     def teardown(self, env):
         self.kdbTpObj.stopProc()
         self.kdbRdbObj.stopProc()
-        
+
+
 # Hard-coding `pdf_path`, 'stdout_style' and 'pdf_style' so that the
 # downloadable example gives meaningful and presentable output.
 # NOTE: this programmatic arguments passing approach will cause Testplan
@@ -83,6 +100,7 @@ def main(plan):
             initial_context=INITIAL_CONTEXT,
         )
     )
+
 
 if __name__ == "__main__":
     sys.exit(not main())

@@ -6,7 +6,7 @@ if[not "w"=first string .z.o;system "sleep 1"];
 upd:insert;
 
 / Default port of 5011
-\p 5011
+if[not system "p";system "p 5011"];
 
 / get the ticker plant and history ports, defaults are 5010,5012
 .u.x:.z.x,(count .z.x)_(":5010";":5012");
